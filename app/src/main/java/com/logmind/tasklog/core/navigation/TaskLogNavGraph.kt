@@ -77,7 +77,7 @@ fun TaskLogNavGraph(
             ) {
                 HomeScreen(
                     openDrawer = { scope.launch { drawerState.open() } },
-                    navActions = navActions
+                    navActions = navActions,
                 )
             }
             composable(

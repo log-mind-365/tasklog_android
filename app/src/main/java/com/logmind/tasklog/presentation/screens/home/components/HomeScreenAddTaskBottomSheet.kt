@@ -29,8 +29,9 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTaskBottomSheet(
+fun HomeScreenAddTaskBottomSheet(
     modifier: Modifier = Modifier,
+    showBottomSheet: Boolean,
     sheetState: SheetState,
     onDismissRequest: () -> Unit,
     taskNameValue: String,
@@ -50,52 +51,53 @@ fun AddTaskBottomSheet(
         }
     }
 
-    ModalBottomSheet(
-        modifier = modifier,
-        sheetState = sheetState,
-        onDismissRequest = onDismissRequest,
-    ) {
-        Column(Modifier.padding(horizontal = Spacing.LG.dp)) {
-            Text("Add Task")
-            Spacer(Modifier.height(Spacing.MD.dp))
-            TextField(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .focusRequester(focusRequester),
-                value = taskNameValue,
-                onValueChange = onTaskNameValueChange,
-                label = { Text("Task Name") }
-            )
-            if (isExpanded) {
+    if (showBottomSheet)
+        ModalBottomSheet(
+            modifier = modifier,
+            sheetState = sheetState,
+            onDismissRequest = onDismissRequest,
+        ) {
+            Column(Modifier.padding(horizontal = Spacing.LG.dp)) {
+                Text("Add Task")
                 Spacer(Modifier.height(Spacing.MD.dp))
                 TextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = descriptionValue,
-                    onValueChange = onDescriptionValueChange,
-                    label = { Text("Task Description") }
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusRequester(focusRequester),
+                    value = taskNameValue,
+                    onValueChange = onTaskNameValueChange,
+                    label = { Text("Task Name") }
                 )
-            }
-            Spacer(Modifier.height(Spacing.MD.dp))
+                if (isExpanded) {
+                    Spacer(Modifier.height(Spacing.MD.dp))
+                    TextField(
+                        modifier = Modifier.fillMaxWidth(),
+                        value = descriptionValue,
+                        onValueChange = onDescriptionValueChange,
+                        label = { Text("Task Description") }
+                    )
+                }
+                Spacer(Modifier.height(Spacing.MD.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                IconButton(
-                    onClick = { onIsExpandedChange(true) }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "AddTask")
-                }
-                TextButton(
-                    onClick = {
-                        onSubmit()
-                        onDismissRequest()
+                    IconButton(
+                        onClick = { onIsExpandedChange(true) }
+                    ) {
+                        Icon(imageVector = Icons.Default.Add, contentDescription = "AddTask")
                     }
-                ) {
-                    Text("Save")
+                    TextButton(
+                        onClick = {
+                            onSubmit()
+                            onDismissRequest()
+                        }
+                    ) {
+                        Text("Save")
+                    }
                 }
+                Spacer(Modifier.height(Spacing.MD.dp))
             }
-            Spacer(Modifier.height(Spacing.MD.dp))
         }
-    }
 }
