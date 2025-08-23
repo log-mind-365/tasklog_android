@@ -11,12 +11,12 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun TaskLogTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    colorTheme: Color = Green,
+    colorTheme: Color = Blue,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        darkTheme -> darkColorScheme(primary = colorTheme)
-        else -> lightColorScheme(primary = colorTheme)
+        darkTheme -> darkColorScheme()
+        else -> lightColorScheme()
     }
 
     MaterialTheme(

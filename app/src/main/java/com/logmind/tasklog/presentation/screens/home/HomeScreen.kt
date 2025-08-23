@@ -11,9 +11,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,7 +45,9 @@ fun HomeScreen(
     Scaffold(
         topBar = { HomeScreenTopAppBar(openDrawer = openDrawer) },
         floatingActionButton = {
-            FloatingActionButton(onClick = { showBottomSheet = true }) {
+            FloatingActionButton(
+                onClick = { showBottomSheet = true }
+            ) {
                 Icon(imageVector = Icons.Filled.Add, contentDescription = "AddTask")
             }
         }
@@ -90,6 +94,11 @@ fun HomeScreen(
 @Composable
 fun HomeScreenTopAppBar(openDrawer: () -> Unit) {
     TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        ),
         title = { Text("Home") },
         navigationIcon = {
             IconButton(onClick = openDrawer) {
