@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
@@ -23,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.logmind.tasklog.domain.entities.Task
 
@@ -45,22 +47,18 @@ fun TaskItem(onClick: () -> Unit, onCheck: () -> Unit, item: Task) {
                 .padding(16.dp)
         ) {
             Text(item.title, style = MaterialTheme.typography.titleMedium)
-            Text(item.description, style = MaterialTheme.typography.bodyMedium)
-        }
-        IconButton(
-            onClick = { /*TODO*/ }
-        ) {
-            Icon(Icons.Filled.Delete, contentDescription = "delete")
+            if (item.description.isNotBlank()) {
+                Text(item.description, style = MaterialTheme.typography.bodyMedium)
+            }
         }
         OptionButtonWithDropdown()
     }
 }
 
+
 @Composable
-fun OptionButtonWithDropdown() {
+private fun OptionButtonWithDropdown() {
     var expanded by remember { mutableStateOf(false) }
-    var selectedOptionText by remember { mutableStateOf("") }
-    val options = listOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
 
     Box {
         IconButton(
@@ -72,15 +70,27 @@ fun OptionButtonWithDropdown() {
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            options.forEach { option ->
+            MenuItems.menu.forEach { option ->
                 DropdownMenuItem(
-                    text = { Text(option) },
+                    text = { Text(option.name) },
+                    leadingIcon = { Icon(option.icon, contentDescription = null) },
                     onClick = {
-                        selectedOptionText = option
                         expanded = false
                     }
                 )
             }
         }
     }
+}
+
+data class MenuItem(
+    val name: String,
+    val icon: ImageVector
+)
+
+object MenuItems {
+    val menu = listOf(
+        MenuItem("Edit", Icons.Filled.Edit),
+        MenuItem("Delete", Icons.Filled.Delete)
+    )
 }
