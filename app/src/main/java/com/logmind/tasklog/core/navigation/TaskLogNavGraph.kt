@@ -1,6 +1,5 @@
 package com.logmind.tasklog.core.navigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,6 +39,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.logmind.tasklog.core.constants.Spacing
+import com.logmind.tasklog.presentation.components.DrawerContent
 import com.logmind.tasklog.presentation.screens.home.HomeScreen
 import com.logmind.tasklog.presentation.screens.taskdetail.TaskDetailScreen
 import com.logmind.tasklog.presentation.theme.TaskLogTheme
@@ -89,91 +89,5 @@ fun TaskLogNavGraph(
                 TaskDetailScreen(onBackPressed = { navActions.navigateBack() })
             }
         }
-    }
-}
-
-@Composable
-fun DrawerContent(
-    closeDrawer: () -> Unit,
-    currentRoute: String,
-    navActions: TaskLogNavigationActions
-) {
-    ModalDrawerSheet(Modifier.fillMaxWidth(fraction = 0.8f)) {
-        Column(
-            modifier = Modifier.padding(vertical = Spacing.MD.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            DrawerHeader(closeDrawer = closeDrawer)
-            DrawerButton(
-                onClick = {
-                    navActions.navigateToHome()
-                    closeDrawer()
-                },
-                isSelected = currentRoute == Routes.HOME,
-                icon = Icons.Default.Home,
-                text = "Home"
-            )
-        }
-    }
-}
-
-@Composable
-fun DrawerHeader(closeDrawer: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.primaryContainer)
-            .padding(start = Spacing.MD.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            "TaskLog",
-            modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.headlineSmall
-        )
-        IconButton(onClick = closeDrawer) {
-            Icon(imageVector = Icons.Default.Close, contentDescription = "Close")
-        }
-    }
-}
-
-@Composable
-fun DrawerButton(
-    onClick: () -> Unit,
-    isSelected: Boolean,
-    icon: ImageVector,
-    text: String
-) {
-    TextButton(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = when (isSelected) {
-                true -> MaterialTheme.colorScheme.primary
-                false -> Color.Transparent
-            }
-        )
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Icon(imageVector = icon, contentDescription = "Close")
-            Spacer(Modifier.width(Spacing.MD.dp))
-            Text(text = text, style = MaterialTheme.typography.bodyLarge)
-        }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun DrawerContentPreview() {
-    TaskLogTheme {
-        DrawerContent(
-            closeDrawer = {},
-            currentRoute = Routes.HOME,
-            navActions = TaskLogNavigationActions(rememberNavController())
-        )
     }
 }
