@@ -1,6 +1,5 @@
 package com.logmind.tasklog.presentation.screens.taskdetail
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,13 +22,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun TaskDetailScreen(
     modifier: Modifier = Modifier,
     viewModel: TaskDetailViewModel = hiltViewModel(),
-    onBackPressed: () -> Unit
+    onBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { TaskDetailScreenTopAppBar(onBackPressed = onBackPressed) }
+        topBar = { TaskDetailScreenTopAppBar(onBack = onBack) }
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
             Text("Task Detail Screen")
@@ -39,11 +38,11 @@ fun TaskDetailScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskDetailScreenTopAppBar(onBackPressed: () -> Unit) {
+fun TaskDetailScreenTopAppBar(onBack: () -> Unit) {
     TopAppBar(
         title = { Text("Task Detail") },
         navigationIcon = {
-            IconButton(onClick = onBackPressed) {
+            IconButton(onClick = onBack) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back"
@@ -56,5 +55,5 @@ fun TaskDetailScreenTopAppBar(onBackPressed: () -> Unit) {
 @Preview
 @Composable
 fun TaskDetailScreenPreview() {
-    TaskDetailScreen(onBackPressed = {})
+    TaskDetailScreen(onBack = {})
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TaskLog</string>
+    <string name="profile_screen_title">Profile</string>
+    <string name="mock_profile_image_url"><![CDATA[https://avatars.githubusercontent.com/u/62244340?v=4&size=40]]></string>
 </resources>

@@ -1,6 +1,7 @@
 package com.logmind.tasklog.presentation.screens.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -10,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.logmind.tasklog.core.navigation.TaskLogNavigationActions
+import com.logmind.tasklog.navigation.TaskLogNavigationActions
 import com.logmind.tasklog.presentation.screens.home.components.HomeScreenAddTaskBottomSheet
 import com.logmind.tasklog.presentation.screens.home.components.HomeScreenContent
 import com.logmind.tasklog.presentation.screens.home.components.HomeScreenFloatingActionButton
@@ -29,14 +30,19 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            HomeScreenTopAppBar(openDrawer = openDrawer)
+            HomeScreenTopAppBar(
+                openDrawer = openDrawer,
+                navigateToProfile = navActions::navigateToProfile
+            )
         },
         floatingActionButton = {
             HomeScreenFloatingActionButton(onClick = viewModel::updateShowBottomSheet)
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
         ) {
             HomeScreenTabBar(
                 selectedFolder = uiState.selectedStatusTab,

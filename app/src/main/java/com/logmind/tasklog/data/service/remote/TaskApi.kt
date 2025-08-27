@@ -11,22 +11,22 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface TaskApi {
-    @GET("tasks")
+    @GET("api/tasks")
     suspend fun getTasks(): Response<List<NetworkTask>>
 
-    @GET("tasks/{id}")
+    @GET("api/tasks/{id}")
     suspend fun getTaskById(@Path("id") id: Long): Response<NetworkTask>
 
-    @POST("tasks")
+    @POST("api/tasks")
     suspend fun addTask(@Body task: AddTaskRequest): Response<NetworkTask>
 
-    @PATCH("tasks/{id}")
+    @PATCH("api/tasks/{id}")
     suspend fun updateTask(
         @Path("id") id: Long,
         @Body task: UpdateTaskRequest
     ): Response<NetworkTask>
 
-    @POST("tasks/{id}")
+    @POST("api/tasks/{id}")
     suspend fun updateTaskStatus(
         @Path("id") id: Long,
         @Body isCompleted: Boolean

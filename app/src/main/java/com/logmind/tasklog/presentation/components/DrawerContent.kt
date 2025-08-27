@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.logmind.tasklog.core.constants.Spacing
-import com.logmind.tasklog.core.navigation.Routes
-import com.logmind.tasklog.core.navigation.TaskLogNavigationActions
+import com.logmind.tasklog.navigation.Routes
+import com.logmind.tasklog.navigation.TaskLogNavigationActions
 import com.logmind.tasklog.presentation.theme.TaskLogTheme
 
 
