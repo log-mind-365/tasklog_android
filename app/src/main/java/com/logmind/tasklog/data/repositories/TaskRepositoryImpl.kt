@@ -3,7 +3,7 @@ package com.logmind.tasklog.data.repositories
 import com.logmind.tasklog.data.models.requests.AddTaskRequest
 import com.logmind.tasklog.data.models.requests.UpdateTaskRequest
 import com.logmind.tasklog.data.models.responses.toDomain
-import com.logmind.tasklog.data.service.remote.TaskApi
+import com.logmind.tasklog.data.remote.TaskApi
 import com.logmind.tasklog.domain.entities.Task
 import com.logmind.tasklog.domain.repositories.TaskRepository
 import javax.inject.Inject

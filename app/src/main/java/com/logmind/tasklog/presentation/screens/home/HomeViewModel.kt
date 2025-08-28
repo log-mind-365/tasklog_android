@@ -51,16 +51,13 @@ class HomeViewModel @Inject constructor(
     fun updateShowBottomSheet(value: Boolean) = _uiState.update { it.copy(showBottomSheet = value) }
 
     fun updateSelectedStatusTab(value: Int) = _uiState.update { it.copy(selectedStatusTab = value) }
-    
+
     fun refresh() {
         viewModelScope.launch {
             _uiState.update { it.copy(isRefreshing = true) }
-            getTasksUseCase()
-                .onSuccess { tasks ->
-                    _uiState.update { it.copy(items = tasks, isRefreshing = false) }
-                }.onFailure { error ->
-                    _uiState.update { it.copy(error = error.message, isRefreshing = false) }
-                }
+            getTasksUseCase().let {
+                _uiState.update { it.copy(items = it.items, isRefreshing = false) }
+            }
         }
     }
 
