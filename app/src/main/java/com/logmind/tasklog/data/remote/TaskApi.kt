@@ -1,4 +1,4 @@
-package com.logmind.tasklog.data.service.remote
+package com.logmind.tasklog.data.remote
 
 import com.logmind.tasklog.data.models.requests.AddTaskRequest
 import com.logmind.tasklog.data.models.requests.UpdateTaskRequest

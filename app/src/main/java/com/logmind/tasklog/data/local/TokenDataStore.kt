@@ -1,4 +1,4 @@
-package com.logmind.tasklog.data.service.local
+package com.logmind.tasklog.data.local
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -12,13 +12,14 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
-class TokenDataStoreService @Inject constructor(
+class TokenDataStore @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     companion object {
-        private val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
-        private val REFRESH_TOKEN_KEY = stringPreferencesKey("refresh_token")
+        val ACCESS_TOKEN_KEY = stringPreferencesKey("access_token")
+        val REFRESH_TOKEN_KEY = stringPreferencesKey("refresh_token")
     }
 
     private val dataStore = context.dataStore
@@ -44,4 +45,4 @@ class TokenDataStoreService @Inject constructor(
 
 }
 
-const val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "app_preferences")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "token_prefs")

@@ -1,7 +1,9 @@
-package com.logmind.tasklog.data.service.remote
+package com.logmind.tasklog.data.remote
 
 import com.logmind.tasklog.data.models.requests.JoinRequest
 import com.logmind.tasklog.data.models.requests.LoginRequest
+import com.logmind.tasklog.data.models.requests.RefreshTokenRequest
+import com.logmind.tasklog.data.models.responses.AuthResponse
 import com.logmind.tasklog.domain.entities.User
 import retrofit2.Response
 import retrofit2.http.Body
@@ -12,16 +14,17 @@ import retrofit2.http.Path
 interface AuthApi {
 
     @POST("api/auth/join")
-    suspend fun join(@Body request: JoinRequest): Response<User>
+    suspend fun join(@Body request: JoinRequest): Response<AuthResponse>
 
     @POST("api/auth/login")
-    suspend fun login(@Body request: LoginRequest): Response<User>
+    suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
+
+    @POST("api/auth/refresh")
+    suspend fun refreshToken(@Body request: RefreshTokenRequest): Response<AuthResponse>
 
     @POST("api/auth/logout")
     suspend fun logout(): Response<Unit>
 
     @GET("api/auth/{id}")
     suspend fun getUserInfo(@Path("id") id: Long): Response<User>
-
-
 }
