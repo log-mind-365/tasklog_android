@@ -9,9 +9,7 @@ interface TaskRepository {
 
     suspend fun getTaskById(id: Long): Result<Task>
 
-    suspend fun addTask(task: AddTaskRequest): Result<Unit>
+    suspend fun addTask(task: AddTaskRequest): Result<Task>
 
     suspend fun updateTask(id: Long, task: UpdateTaskRequest): Result<Task>
-
-    suspend fun updateTaskStatus(id: Long, isCompleted: Boolean): Result<Unit>
 }

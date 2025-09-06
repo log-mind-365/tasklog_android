@@ -25,10 +25,4 @@ interface TaskApi {
         @Path("id") id: Long,
         @Body task: UpdateTaskRequest
     ): Response<NetworkTask>
-
-    @POST("api/tasks/{id}")
-    suspend fun updateTaskStatus(
-        @Path("id") id: Long,
-        @Body isCompleted: Boolean
-    ): Response<Unit>
 }

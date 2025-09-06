@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.logmind.tasklog.navigation.TaskLogNavGraph
-import com.logmind.tasklog.presentation.theme.TaskLogTheme
+import com.logmind.tasklog.core.ui.theme.TaskLogTheme
+import com.logmind.tasklog.presentation.TaskLogApp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TaskLogTheme {
-                TaskLogNavGraph()
+                TaskLogApp()
             }
         }
     }
